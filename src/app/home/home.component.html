@@ -1,0 +1,45 @@
+<div class="container">
+    <!-- <div class="row">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search here" 
+                [(ngModel)]="searchString" (keydown.enter)="search($event)">
+        </div>
+    </div> -->
+    <div class="row" style="padding-top: 2%;">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Location</label> &nbsp;
+                <select class="form-control" (change)="filterLocation($event.target.value)">
+                    <option value="{{null}}">-- ALL --</option>
+                    <option *ngFor="let location of locationList" value="{{location}}">{{location.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Speciality</label> &nbsp;
+                <select class="form-control" (change)="filterSpeciality($event.target.value)">
+                    <option value="{{null}}">-- ALL --</option>
+                    <option *ngFor="let speciality of specialityList" value="{{speciality}}">{{speciality.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Specialist</label> &nbsp;
+                <select class="form-control" (change)="filterSpecialist($event.target.value)">
+                    <option value="{{null}}">-- ALL --</option>
+                    <option *ngFor="let doctor of doctorsList" value="{{doctor}}">
+                        {{doctor.name + " (" + doctor.hospital + ")"}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 2%;">
+        <div class="form-group">
+            <button (click)="goToAppointment()" class="btn btn-success btn-sm">Book appointment</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row" style="padding-top: 2%;">
+        <div class="media">
+            <img class="align-self-start mr-3" src="../../assets/images/bitmoji.png" alt="Generic placeholder image"
+                style="width: 13%;">
+            <div class="media-body">
+                <h5 class="mt-0">Dr. {{doctor.name}} - {{hospital.name}}</h5>
+                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                    purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                    vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque
+                    penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row" style="padding-top: 2%;">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">Contact</label>
+                    <input type="number" class="form-control" id="inputPassword4" placeholder="Contact number">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">Time</label>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option *ngFor="let t of time" value="{{t}}">
+                                    {{t}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option *ngFor="let half of ampm" value="{{half}}">
+                                    {{half}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" 
+                (click)="scheduleAppointment(appointmentConfirmModal)">Schedule Appointment</button>
+
+
+
+            <ng-template #appointmentConfirmModal let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Appointment scheduled</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <p>Your appointment with Dr. {{doctor.name}} is scheduled!</p>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+                </div> -->
+            </ng-template>
+
+
+
+            <div class="modal fade" id="appointmentConfirmModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Appointment scheduled</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Your appointment with Dr. {{doctor.name}} is scheduled!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
