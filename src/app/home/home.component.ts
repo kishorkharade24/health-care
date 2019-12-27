@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { SpecialityServiceService } from '../services/speciality/speciality-service.service';
+import { HospitalService } from '../services/hospital/hospital.service';
+import { DoctorService } from '../services/doctor/doctor.service'; 
+
+import { Speciality } from '../models/speciality';
+import { Doctor } from '../models/doctor';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,7 +29,7 @@ export class HomeComponent implements OnInit {
     "id": 3
   }];
 
-  specialityList: any = [{
+  /*specialityList: any = [{
     "name": "Allergy & Immunology",
     "id": 1
   },
@@ -33,7 +40,7 @@ export class HomeComponent implements OnInit {
   {
     "name": "Neurology",
     "id": 3
-  }];
+  }];*/
 
   doctorsList: any = [{
     "name": "Tarun Singh",
@@ -50,10 +57,16 @@ export class HomeComponent implements OnInit {
     "id": 3,
     "hospital": "Apollo Hospital"
   }];
+
+  specialityList: Speciality[] = [];
   
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, 
+    private specialityService: SpecialityServiceService,
+    private hospitalService: HospitalService,
+    private doctorService: DoctorService) { }
 
   ngOnInit() {
+    this.getSpecialities();
   }
 
   search() {
@@ -63,8 +76,10 @@ export class HomeComponent implements OnInit {
   filterLocation(location) {
 
   }
+
   filterSpeciality(speciality) {
-    
+    console.log(speciality);
+    this.getHospitalsBySpecialities(speciality);
   }
 
   filterSpecialist(specialist) {
@@ -73,5 +88,20 @@ export class HomeComponent implements OnInit {
 
   goToAppointment() {
     this.router.navigate(['book-appointment']);
+  }
+
+  getSpecialities() {
+    this.specialityService.getSpecialities().subscribe((response) => {
+      //console.log("**************")
+      //console.table(response);
+      this.specialityList = response;
+    });
+  }
+
+  getHospitalsBySpecialities(specialities: String) {
+    this.hospitalService.getHospitalListBySpecialities(specialities).subscribe((response) => {
+      console.log("************* Hospitals *************")
+      console.table(response);
+    });
   }
 }

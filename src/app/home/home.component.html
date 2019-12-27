@@ -20,7 +20,7 @@
                 <label>Speciality</label> &nbsp;
                 <select class="form-control" (change)="filterSpeciality($event.target.value)">
                     <option value="{{null}}">-- ALL --</option>
-                    <option *ngFor="let speciality of specialityList" value="{{speciality}}">{{speciality.name}}
+                    <option *ngFor="let speciality of specialityList" value="{{speciality.specialityName}}">{{speciality.specialityName}}
                     </option>
                 </select>
             </div>
